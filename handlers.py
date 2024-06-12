@@ -28,7 +28,7 @@ async def get_new_cmd(message: Message, state: FSMContext):
 @r.message(Count.count)
 async def send_new(message: Message):
     count = int(message.text)
-    games = parser.get_new()
+    games = parser.get_new(count)
     for i in range(0, count):
         ans_msg = ""
         for key, value in games[i].items():

@@ -3,18 +3,20 @@ from bs4 import BeautifulSoup
 
 from config import *
 
+# Parser for steam
 class WebParser:
     def __init__(self) -> None:
         self.headers = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36'
 }
     
-    def get_new(self):
-        response = requests.get(NEW_GAMES_LINK)
+    def get_new(self, count):
+        response = requests.get(NEW_GAMES_LINK.format(count=count))
 
         res = []
 
         s = BeautifulSoup(response.text, "lxml")
+        # Getting all game links
         games = s.find_all("a", onmouseout="HideGameHover( this, event, 'global_hover' )")
         for game in games:
 
@@ -23,6 +25,7 @@ class WebParser:
             date = game.find("div", class_="col search_released responsive_secondrow").text.strip()
             link = game.get("href")
 
+            # Saving
             res.append({
                 "Name" : name,
                 "Price" : price,
