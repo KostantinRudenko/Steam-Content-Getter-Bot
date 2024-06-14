@@ -1,6 +1,6 @@
 import asyncio
 from aiogram import Bot, Dispatcher
-from handlers import r
+from app.handlers import r
 
 from config import *
 
@@ -17,7 +17,6 @@ class Main:
 if __name__ == "__main__":
     try:
         main = Main()
-        func = main.run_bot
         asyncio.run(main.run_bot())
     except KeyboardInterrupt:
         print("Bot stopped")
